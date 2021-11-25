@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 AS builder
+FROM ubuntu:18.04
 
 LABEL version="0.1" \
       maintainer="daniiomir@yandex.ru"
@@ -32,7 +32,9 @@ RUN apt update \
     && python3.8 get-pip.py \
     && pip install postal \
     && rm -rf /tmp/* \
-    && ln -s /usr/bin/python3.8 /usr/bin/python \
-    && ln -s /usr/bin/python3 /usr/bin/python
+    && ln -s /usr/local/bin/python3.8 /usr/bin/python \
+    && ln -s /usr/local/lib/python3.8/site-packages/pip /usr/bin/pip \
+    && echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /root/.bashrc \
+
 
 
