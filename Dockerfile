@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM debian:stable
 
-LABEL version="0.1" \
+LABEL version="0.5" \
       maintainer="daniiomir@yandex.ru"
 
 USER root
@@ -8,6 +8,7 @@ USER root
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
+    && apt -y upgrade \
     && apt install -y curl autoconf automake libtool pkg-config git  \
     build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev  \
     libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev \
@@ -35,6 +36,7 @@ RUN apt update \
     && ln -s /usr/local/bin/python3.8 /usr/bin/python \
     && ln -s /usr/local/lib/python3.8/site-packages/pip /usr/bin/pip \
     && echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /root/.bashrc \
+    && apt -y remove curl
 
 
 
