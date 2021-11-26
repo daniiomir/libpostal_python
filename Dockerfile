@@ -1,6 +1,6 @@
 FROM debian:stable
 
-LABEL version="0.5" \
+LABEL version="0.6" \
       maintainer="daniiomir@yandex.ru"
 
 USER root
@@ -36,7 +36,8 @@ RUN apt update \
     && ln -s /usr/local/bin/python3.8 /usr/bin/python \
     && ln -s /usr/local/lib/python3.8/site-packages/pip /usr/bin/pip \
     && echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /root/.bashrc \
-    && apt -y remove curl
+    && apt -y remove curl \
+    && rm -rf /usr/local/lib/python3.8/test/*.pem
 
 
 
